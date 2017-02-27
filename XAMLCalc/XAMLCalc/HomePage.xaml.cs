@@ -71,40 +71,102 @@ namespace XAMLCalc
                 displayLabel.Text = displayLabel.Text + "3";
 
             }
+            if (button.StyleId == "0")
+            {
+                displayLabel.Text = displayLabel.Text + "0";
+
+            }
             if (button.StyleId == "+")
             {
                 //convert the string to a value
                 displayLabel.Text = displayLabel.Text + "+";
 
             }
+            if (button.StyleId == "*")
+            {
+                //convert the string to a value
+                displayLabel.Text = displayLabel.Text + "*";
+
+            }
+            if (button.StyleId == "/")
+            {
+                //convert the string to a value
+                displayLabel.Text = displayLabel.Text + "/";
+            }
+
+            if (button.StyleId == ".")
+            {
+                //convert the string to a value
+                displayLabel.Text = displayLabel.Text + ".";
+            }
+
+            if (button.StyleId == "plusminus")
+            {
+                //if (displayLabel.Text == null)
+                //{
+                //    displayLabel.Text = "-" + displayLabel.Text;
+                //}
+                //else
+                //{
+                //    //if the string starts with a minus - remove it
+                //    if (displayLabel.Text.Substring(0, 1) == "-")
+                //    {
+                //        displayLabel.Text = displayLabel.Text.Substring(1);
+                //    }
+                //    if (displayLabel.Text.Length > 1)
+                //    {
+                //       displayLabel.Text = "-" + displayLabel.Text;
+                //    }
+                //}
+
+            }
+
+            if (button.StyleId == "-")
+            {
+                //convert the string to a value
+                displayLabel.Text = displayLabel.Text + "-";
+
+            }
             if (button.StyleId == "=")
             {
                 //convert the string to a value
                 String[] expressions = new String[] { displayLabel.Text };
-                decimal total = 0m;
+                decimal total = 0.0000000000m;
+                decimal value1 = 0.0000000000m;
+                decimal value2 = 0.0000000000m;
 
-                String pattern = @"(\d+)+([-+*/])+(\d+)";
+                String pattern = @"([-+*/])";
+                string[] substrings = Regex.Split(displayLabel.Text, pattern);    // Split on hyphens
                 foreach (var expression in expressions)
                     foreach (Match m in Regex.Matches(expression, pattern))
                     {
-                        int value1 = Int32.Parse(m.Groups[1].Value);
-                        int value2 = Int32.Parse(m.Groups[3].Value);
-                        switch (m.Groups[2].Value)
+                        Decimal.TryParse(substrings[0],out value1);
+                        Decimal.TryParse(substrings[2],out value2);
+                        switch (substrings[1])
                         {
                             case "+":
                                 total = value1 + value2;
+                                total = Math.Round(total, 10);
                                 displayLabel.Text = total.ToString();
                                 break;
                             case "-":
                                 total = value1 - value2;
+                                total = Math.Round(total, 10);
+                                displayLabel.Text = total.ToString();
                                 break;
                             case "*":
                                 total = value1 * value2;
+                                total = Math.Round(total, 10);
+                                displayLabel.Text = total.ToString();
                                 break;
                             case "/":
                                 total = value1 / value2;
+                                total = Math.Round(total, 10);
+                                displayLabel.Text = total.ToString();
                                 break;
                         }
+
+                        
                     }
 
 
