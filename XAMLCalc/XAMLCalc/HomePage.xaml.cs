@@ -15,6 +15,7 @@ namespace XAMLCalc
         public HomePage()
         {
             InitializeComponent();
+            this.BackgroundColor = Color.FromRgb(0, 0, 0);
         }
 
         async void OnBackspaceButtonClicked(object sender, EventArgs e)
@@ -179,5 +180,22 @@ namespace XAMLCalc
             }
         }
 
+        async void OnOriginalStyleButtonClicked(object sender, EventArgs e)
+        {
+            await App.Current.MainPage.DisplayAlert("User Message", "Change to Original Style?", "YesNo");
+            //Resources["Button"] = Resources["btnOriginal"];
+            this.BackgroundColor = Color.FromRgb(0, 0, 0);
+            Resources["newMainStyle"] = Resources["btnMainStyle"];
+            Resources["newdisplayLabel"] = Resources["maindisplayLabel"];
+        }
+
+        async void OnAlternateStyleButtonClicked(object sender, EventArgs e)
+        {
+            await App.Current.MainPage.DisplayAlert("User Message", "Change to Alternate Style?", "YesNo");
+            this.BackgroundColor = Color.FromRgb(255, 215, 0);
+            Resources["newMainStyle"] = Resources["btnAlternateStyle"];
+            Resources["newdisplayLabel"] = Resources["altdisplayLabel"];
+        }
+        
     }
 }

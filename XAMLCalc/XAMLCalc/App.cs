@@ -44,5 +44,6 @@ namespace XAMLCalc
         {
             // Handle when your app resumes
         }
+
     }
 }
